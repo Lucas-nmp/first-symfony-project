@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Registro de Usuario{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .form-container { margin: 1em auto; max-width: 600px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="form-container">
+    <h1>Registro de Usuario</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Lucas/Documents/WorkspaceSymfony/primer_proyecto/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Lucas/Documents/WorkspaceSymfony/primer_proyecto/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
-    </ul>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.phone) }}
+        
+        <button type="button" onclick="resetForm()">Cancelar</button>
+        <button type="submit">Guardar</button>
+    {{ form_end(form) }}
 </div>
+
+<script>
+    function resetForm() {
+        document.querySelector('form').reset();
+    }
+</script>
 {% endblock %}

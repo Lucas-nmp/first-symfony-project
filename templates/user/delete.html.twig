@@ -1,0 +1,36 @@
+{% extends 'home/index.html.twig' %}
+
+{% block title %}Eliminar Usuario{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card p-4" style="max-width: 500px; width: 100%;">
+        <h2 class="card-title mb-4 text-center">Eliminar Usuario</h2>
+
+        <!-- Mostrar mensajes flash -->
+        {% for label, messages in app.flashes %}
+            <div class="alert alert-{{ label }}">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+        
+        <div class="mb-3">
+            {{ form_label(form.userId, 'ID del Usuario', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.userId, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.userId) }}
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('homepage') }}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
+

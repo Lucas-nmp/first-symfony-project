@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
 
 class UserType extends AbstractType
 {
@@ -30,7 +31,14 @@ class UserType extends AbstractType
                 'constraints' => [new NotBlank(['message' => 'La contraseña es obligatoria'])]
             ])
             ->add('phone', TextType::class, [
-                'constraints' => [new NotBlank(['message' => 'El teléfono es obligatorio'])]
+                'constraints' => [
+                    new NotBlank(['message' => 'El teléfono es obligatorio']),
+                    new Length([
+                        'min' => 9,
+                        'max' => 9,
+                        'exactMessage' => 'El número de teléfono no puede tener más de 9 dígitos'
+                    ])
+                ]
             ]);
     }
 
